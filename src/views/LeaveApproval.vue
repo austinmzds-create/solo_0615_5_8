@@ -15,7 +15,6 @@ const router = useRouter()
 
 const applications = ref<LeaveApplication[]>([])
 const activeTab = ref<LeaveStatus | 'all'>('all')
-const filterFormRef = ref<FormInstance>()
 const detailVisible = ref(false)
 const rejectDialogVisible = ref(false)
 const currentApplication = ref<LeaveApplication | null>(null)

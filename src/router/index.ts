@@ -5,17 +5,12 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      redirect: '/login'
+      redirect: '/menu'
     },
     {
-      path: '/login',
-      name: 'Login',
-      component: () => import('../views/Login.vue')
-    },
-    {
-      path: '/leave-approval',
-      name: 'LeaveApproval',
-      component: () => import('../views/LeaveApproval.vue')
+      path: '/menu',
+      name: 'Menu',
+      component: () => import('../views/Menu.vue')
     }
   ]
 })
