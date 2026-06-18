@@ -82,6 +82,13 @@ export function useOrderStore() {
     saveToStorage(CART_STORAGE_KEY, [])
   }
 
+  function updateCartItemRemark(menuItemId: number, remark: string) {
+    const item = state.cart.find((i) => i.menuItem.id === menuItemId)
+    if (item) {
+      item.remark = remark
+    }
+  }
+
   function submitOrder(tableNumber?: string, remark?: string): Order {
     const order: Order = {
       id: `ORD${Date.now()}`,
@@ -110,6 +117,7 @@ export function useOrderStore() {
     removeFromCart,
     getItemQuantity,
     clearCart,
+    updateCartItemRemark,
     submitOrder,
     getOrderById
   }

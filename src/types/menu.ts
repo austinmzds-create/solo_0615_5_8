@@ -16,6 +16,7 @@ export interface Category {
 export interface CartItem {
   menuItem: MenuItem
   quantity: number
+  remark?: string
 }
 
 export interface Order {

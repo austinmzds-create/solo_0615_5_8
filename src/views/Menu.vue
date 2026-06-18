@@ -84,6 +84,13 @@
           <div class="cart-item-info">
             <h4>{{ item.menuItem.name }}</h4>
             <p class="cart-item-price">¥{{ item.menuItem.price }}</p>
+            <el-input
+              v-model="item.remark"
+              class="cart-item-remark"
+              placeholder="备注：少辣、不要香菜等"
+              size="small"
+              @update:model-value="(val) => updateCartItemRemark(item.menuItem.id, val || '')"
+            />
           </div>
           <div class="quantity-control">
             <el-button
@@ -150,9 +157,14 @@
           <el-divider class="order-divider" />
           <div class="order-items">
             <div v-for="item in order.items" :key="item.menuItem.id" class="order-item">
-              <span>{{ item.menuItem.name }}</span>
-              <span>x{{ item.quantity }}</span>
-              <span>¥{{ (item.menuItem.price * item.quantity).toFixed(2) }}</span>
+              <div class="order-item-main">
+                <span>{{ item.menuItem.name }}</span>
+                <span>x{{ item.quantity }}</span>
+                <span>¥{{ (item.menuItem.price * item.quantity).toFixed(2) }}</span>
+              </div>
+              <div v-if="item.remark" class="order-item-remark">
+                备注：{{ item.remark }}
+              </div>
             </div>
           </div>
           <el-divider class="order-divider" />
@@ -196,6 +208,7 @@ const {
   addToCart,
   removeFromCart,
   getItemQuantity,
+  updateCartItemRemark,
   submitOrder
 } = useOrderStore()
 
@@ -501,6 +514,10 @@ function formatDate(dateStr: string): string {
   font-weight: 600;
 }
 
+.cart-item-remark {
+  margin-top: 8px;
+}
+
 .order-form {
   padding: 16px 0;
 }
@@ -587,9 +604,23 @@ function formatDate(dateStr: string): string {
 
 .order-item {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   font-size: 14px;
   color: #333;
+}
+
+.order-item-main {
+  display: flex;
+  justify-content: space-between;
+}
+
+.order-item-remark {
+  margin-top: 4px;
+  font-size: 12px;
+  color: #999;
+  background: #f9f9f9;
+  padding: 4px 8px;
+  border-radius: 4px;
 }
 
 .order-total {
