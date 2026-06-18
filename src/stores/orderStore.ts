@@ -78,7 +78,8 @@ export function useOrderStore() {
   }
 
   function clearCart() {
-    state.cart = []
+    state.cart.splice(0, state.cart.length)
+    saveToStorage(CART_STORAGE_KEY, [])
   }
 
   function submitOrder(tableNumber?: string, remark?: string): Order {
